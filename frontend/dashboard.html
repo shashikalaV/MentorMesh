@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - MentorMesh</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+<nav class="navbar">
+    <h1>MentorMesh</h1>
+
+    <div>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="profile.html">Profile</a>
+        <a href="match.html">Match</a>
+        <a href="requests.html">Requests</a>
+
+        <!-- Logout button -->
+        <a href="#" onclick="logoutUser()">Logout</a>
+    </div>
+</nav>
+
+<!-- =========================
+     DASHBOARD CONTENT
+========================= -->
+<div class="dashboard">
+
+    <!-- Welcome Section -->
+    <h2 id="welcomeText">Welcome, User</h2>
+
+    <!-- Skills Section -->
+    <div class="card-container">
+
+        <!-- Teach Skills -->
+        <div class="card">
+            <h3>Skills You Teach</h3>
+            <ul id="teachSkills">
+                <li>No skills added</li>
+            </ul>
+        </div>
+
+        <!-- Learn Skills -->
+        <div class="card">
+            <h3>Skills You Want to Learn</h3>
+            <ul id="learnSkills">
+                <li>No skills added</li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- JS -->
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>
