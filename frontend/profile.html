@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile - MentorMesh</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <h1>MentorMesh</h1>
+    <div>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="match.html">Match</a>
+        <a href="requests.html">Requests</a>
+    </div>
+</nav>
+
+<div class="profile-page">
+
+    <!-- TOP PROFILE SECTION -->
+    <div class="profile-header">
+
+        <div class="profile-img-section">
+
+            <!-- Profile Image -->
+            <img src="https://via.placeholder.com/120" id="profileImage">
+
+            <!-- Upload input (hidden) -->
+            <input type="file" id="imageUpload" hidden>
+
+            <!-- Badge -->
+            <span id="badge" class="badge hidden">✔</span>
+
+        </div>
+
+        <div class="profile-info">
+            <h2 id="profileName">User Name</h2>
+            <p id="bioText">No bio added</p>
+        </div>
+
+    </div>
+
+    <!-- SKILLS DISPLAY -->
+    <div class="profile-section">
+        <h3>Teaching Skills</h3>
+        <div id="teachList" class="skill-tags"></div>
+    </div>
+
+    <div class="profile-section">
+        <h3>Learning Skills</h3>
+        <div id="learnList" class="skill-tags"></div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="profile-actions">
+        <button class="btn" onclick="toggleEdit()">Edit Profile</button>
+        <button class="btn" onclick="openPrivacy()">Privacy Settings</button>
+        <button class="btn" onclick="logoutUser()">Logout</button>
+        <button class="btn delete-btn" onclick="deleteAccount()">Delete Account</button>
+    </div>
+
+    <!-- EDIT MODE -->
+    <div id="editSection" class="edit-section hidden">
+
+        <textarea id="bioInput" placeholder="Edit your bio"></textarea>
+
+        <input type="text" id="teachInput" placeholder="Add teach skill">
+        <button onclick="addTeachSkill()">Add</button>
+
+        <input type="text" id="learnInput" placeholder="Add learn skill">
+        <button onclick="addLearnSkill()">Add</button>
+
+        <input type="text" id="githubLink" placeholder="GitHub / Project link">
+
+        <button class="btn" onclick="saveProfile()">Save Changes</button>
+    </div>
+
+</div>
+
+<script src="js/profile.js"></script>
+
+</body>
+</html>
