@@ -77,6 +77,13 @@ function saveProfile() {
     localStorage.setItem("bio", document.getElementById("bioInput").value);
     alert("Profile updated");
     location.reload();
+
+    const newName = document.getElementById("nameInput").value;
+
+if (newName) {
+    user.name = newName;
+    localStorage.setItem("user", JSON.stringify(user));
+}
 }
 
 /* PRIVACY */

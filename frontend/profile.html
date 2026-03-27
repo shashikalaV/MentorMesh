@@ -29,7 +29,7 @@
             <input type="file" id="imageUpload" hidden>
 
             <!-- Badge -->
-            <span id="badge" class="badge hidden">✔</span>
+            <span id="badge" class="badge hidden">✔ Verified</span>
 
         </div>
 
@@ -43,12 +43,12 @@
     <!-- SKILLS DISPLAY -->
     <div class="profile-section">
         <h3>Teaching Skills</h3>
-        <div id="teachList" class="skill-tags"></div>
+        <div id="teachList" class="skill-box"></div>
     </div>
 
     <div class="profile-section">
         <h3>Learning Skills</h3>
-        <div id="learnList" class="skill-tags"></div>
+        <div id="learnList" class="skill-box"></div>
     </div>
 
     <!-- ACTIONS -->
@@ -62,7 +62,8 @@
     <!-- EDIT MODE -->
     <div id="editSection" class="edit-section hidden">
 
-        <textarea id="bioInput" placeholder="Edit your bio"></textarea>
+        <input type="text" id="nameInput" placeholder="Edit Name">
+        <textarea id="bioInput" placeholder="Edit Bio"></textarea>
 
         <input type="text" id="teachInput" placeholder="Add teach skill">
         <button onclick="addTeachSkill()">Add</button>

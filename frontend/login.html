@@ -6,23 +6,31 @@
 </head>
 <body>
 
-<div class="form-container">
-    <h2>Welcome Back</h2>
+<div class="auth-container">
 
-    <!-- Input fields with IDs -->
-    <input type="email" id="loginEmail" placeholder="Enter Email">
-    <input type="password" id="loginPassword" placeholder="Enter Password">
+    <div class="auth-card">
 
-    <!-- Button triggers JS -->
-    <button class="btn" onclick="loginUser()">Login</button>
+        <h2>Welcome Back</h2>
 
-    <p style="margin-top:15px;">
-        Don't have an account? <a href="register.html">Register</a>
-    </p>
+        <!-- Email -->
+        <input type="email" id="loginEmail" placeholder="Enter Email">
+
+        <!-- Password -->
+        <input type="password" id="loginPassword" placeholder="Enter Password">
+
+        <!-- Button -->
+        <button class="btn" onclick="loginUser()">Login</button>
+
+        <p>
+            Don't have an account?
+            <a href="register.html">Register</a>
+        </p>
+
+    </div>
+
 </div>
 
-<!-- Linking JavaScript -->
 <script src="js/auth.js"></script>
 
 </body>
-</html>
+</html>s

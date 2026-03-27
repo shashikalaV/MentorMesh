@@ -6,23 +6,33 @@
 </head>
 <body>
 
-<div class="form-container">
-    <h2>Create Account</h2>
+<div class="auth-container">
 
-    <!-- Input fields with IDs (important for JS) -->
-    <input type="text" id="name" placeholder="Full Name">
-    <input type="email" id="email" placeholder="Email Address">
-    <input type="password" id="password" placeholder="Password">
+    <div class="auth-card">
 
-    <!-- Button triggers JS function -->
-    <button class="btn" onclick="registerUser()">Register</button>
+        <h2>Create Account</h2>
 
-    <p style="margin-top:15px;">
-        Already have an account? <a href="login.html">Login</a>
-    </p>
+        <!-- Name -->
+        <input type="text" id="name" placeholder="Full Name">
+
+        <!-- Email -->
+        <input type="email" id="email" placeholder="Email Address">
+
+        <!-- Password -->
+        <input type="password" id="password" placeholder="Password">
+
+        <!-- Button -->
+        <button class="btn" onclick="registerUser()">Register</button>
+
+        <p>
+            Already have an account?
+            <a href="login.html">Login</a>
+        </p>
+
+    </div>
+
 </div>
 
-<!-- Linking JavaScript -->
 <script src="js/auth.js"></script>
 
 </body>

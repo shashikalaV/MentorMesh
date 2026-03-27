@@ -1,61 +1,27 @@
-/* =========================
-   LOAD USER
-========================= */
 const user = JSON.parse(localStorage.getItem("user"));
 
-if (!user) {
-    alert("Please login first");
-    window.location.href = "login.html";
-}
+if (!user) window.location.href = "login.html";
 
-/* =========================
-   SHOW USER NAME
-========================= */
+/* NAME */
 document.getElementById("welcomeText").innerText = "Welcome, " + user.name;
 
-/* =========================
-   LOAD SKILLS FROM STORAGE
-========================= */
+/* DATA */
 const teachSkills = JSON.parse(localStorage.getItem("teachSkills")) || [];
 const learnSkills = JSON.parse(localStorage.getItem("learnSkills")) || [];
+const requests = JSON.parse(localStorage.getItem("requests")) || [];
 
-/* =========================
-   DISPLAY TEACH SKILLS
-========================= */
-const teachList = document.getElementById("teachSkills");
-teachList.innerHTML = "";
+/* COUNTS */
+document.getElementById("teachCount").innerText = teachSkills.length;
+document.getElementById("learnCount").innerText = learnSkills.length;
+document.getElementById("requestCount").innerText = requests.length;
 
-if (teachSkills.length === 0) {
-    teachList.innerHTML = "<li>No skills added</li>";
-} else {
-    teachSkills.forEach(skill => {
-        const li = document.createElement("li");
-        li.innerText = skill;
-        teachList.appendChild(li);
-    });
-}
+/* DISPLAY SKILLS */
+const teachDiv = document.getElementById("teachSkills");
+teachSkills.forEach(s => {
+    teachDiv.innerHTML += `<span>${s}</span>`;
+});
 
-/* =========================
-   DISPLAY LEARN SKILLS
-========================= */
-const learnList = document.getElementById("learnSkills");
-learnList.innerHTML = "";
-
-if (learnSkills.length === 0) {
-    learnList.innerHTML = "<li>No skills added</li>";
-} else {
-    learnSkills.forEach(skill => {
-        const li = document.createElement("li");
-        li.innerText = skill;
-        learnList.appendChild(li);
-    });
-}
-
-/* =========================
-   LOGOUT
-========================= */
-function logoutUser() {
-    localStorage.removeItem("user");
-    alert("Logged out successfully");
-    window.location.href = "login.html";
-}
+const learnDiv = document.getElementById("learnSkills");
+learnSkills.forEach(s => {
+    learnDiv.innerHTML += `<span>${s}</span>`;
+});
