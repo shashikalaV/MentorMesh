@@ -1,14 +1,43 @@
 import { useState } from "react";
 
-// Register Page Component
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Register Data:", { name, email, password });
+
+    try {
+      const res = await fetch("http://localhost:5000/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password
+        })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert(data.message);
+
+        // clear form after success
+        setName("");
+        setEmail("");
+        setPassword("");
+      } else {
+        alert(data.message);
+      }
+
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong ❌");
+    }
   };
 
   return (
@@ -22,6 +51,7 @@ function Register() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           style={styles.input}
+          required
         />
 
         <input
@@ -30,6 +60,7 @@ function Register() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           style={styles.input}
+          required
         />
 
         <input
@@ -38,6 +69,7 @@ function Register() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           style={styles.input}
+          required
         />
 
         <button type="submit" style={styles.button}>
