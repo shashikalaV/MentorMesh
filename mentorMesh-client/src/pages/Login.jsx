@@ -1,49 +1,91 @@
 import { useState } from "react";
 
-// Login Page Component
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login Data:", { email, password });
+
+    try {
+      const res = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert(data.message);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        window.location.href = "/profile";
+      } else {
+        alert(data.message);
+      }
+
+    } catch (err) {
+      alert("Something went wrong ❌");
+    }
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Login</h2>
+    <div style={styles.page}>
+      <div style={styles.card}>
+        <h2>Login</h2>
 
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <input
-          type="email"
-          placeholder="Enter Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={styles.input}
-        />
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <input
+            type="email"
+            placeholder="Enter Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={styles.input}
+            required
+          />
 
-        <input
-          type="password"
-          placeholder="Enter Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={styles.input}
-        />
+          <input
+            type="password"
+            placeholder="Enter Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={styles.input}
+            required
+          />
 
-        <button type="submit" style={styles.button}>
-          Login
-        </button>
-      </form>
+          <button type="submit" style={styles.button}>
+            Login
+          </button>
+
+          <p style={styles.text}>
+  Don't have an account?{" "}
+  <span style={styles.link} onClick={() => window.location.href = "/register"}>
+    Register
+  </span>
+</p>
+        </form>
+      </div>
     </div>
   );
 }
 
 const styles = {
-  container: {
+  page: {
+    height: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "linear-gradient(to right, #4F46E5, #9333EA)",
+  },
+  card: {
+    backgroundColor: "white",
     padding: "30px",
-    maxWidth: "400px",
-    margin: "auto",
+    borderRadius: "10px",
+    width: "300px",
+    textAlign: "center",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
   },
   form: {
     display: "flex",
@@ -63,6 +105,17 @@ const styles = {
     borderRadius: "5px",
     cursor: "pointer",
   },
+
+  text: {
+  marginTop: "10px",
+  fontSize: "14px",
+},
+
+link: {
+  color: "#4F46E5",
+  cursor: "pointer",
+  fontWeight: "bold",
+},
 };
 
 export default Login;

@@ -2,7 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const bcrypt = require("bcrypt"); // 🔐 for hashing
+const bcrypt = require("bcrypt");
 const User = require("./models/User");
 
 const app = express();
@@ -26,16 +26,13 @@ app.post("/api/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    // 1️⃣ Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "Email already exists ❌" });
     }
 
-    // 2️⃣ Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 3️⃣ Save user
     const newUser = new User({
       name,
       email,
@@ -46,6 +43,42 @@ app.post("/api/register", async (req, res) => {
 
     res.status(201).json({
       message: "User registered successfully ✅",
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Server error ❌",
+    });
+  }
+});
+
+// ================= LOGIN API =================
+app.post("/api/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // 1️⃣ Check user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: "User not found ❌" });
+    }
+
+    // 2️⃣ Compare password
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid password ❌" });
+    }
+
+    // 3️⃣ Success
+    res.status(200).json({
+      message: "Login successful ✅",
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      }
     });
 
   } catch (error) {
