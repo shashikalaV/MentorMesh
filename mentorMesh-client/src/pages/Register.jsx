@@ -6,29 +6,33 @@ function Register() {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const res = await fetch("http://localhost:5000/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ name, email, password })
-      });
+  try {
+    const res = await fetch("http://localhost:5000/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (res.ok) {
-        alert(data.message);
-      } else {
-        alert(data.message);
-      }
+    if (res.ok) {
+      // ✅ SAVE USER → AUTO LOGIN
+      localStorage.setItem("user", JSON.stringify(data.user));
 
-    } catch (err) {
-      alert("Something went wrong ❌");
+      alert("Registered & Logged in successfully 🚀");
+
+      window.location.href = "/profile";
+    } else {
+      alert(data.message);
     }
-  };
+  } catch (err) {
+    alert("Something went wrong ❌");
+  }
+};
 
   return (
     <div style={styles.page}>

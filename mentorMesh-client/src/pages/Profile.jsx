@@ -21,36 +21,73 @@ function Profile() {
     }
   };
 
+  const getCourseLimit = (plan) => {
+    switch (plan) {
+      case "gold":
+        return 5;
+      case "platinum":
+        return 10;
+      default:
+        return 3;
+    }
+  };
+
   return (
     <div style={styles.page}>
       {user ? (
-        <div style={styles.card}>
-          
-          {/* Profile Image */}
-          <label style={{ cursor: "pointer" }}>
-            <img
-              src={image || "https://via.placeholder.com/120"}
-              alt="profile"
-              style={styles.image}
-            />
-            <input
-              type="file"
-              onChange={handleImageChange}
-              style={{ display: "none" }}
-            />
-          </label>
+        user.role === "admin" ? (
+          <div style={styles.card}>
+            <h2>Admin Panel 🛠️</h2>
+            <p>Welcome, {user.name}</p>
 
-          <h2>{user.name}</h2>
-          <p>{user.email}</p>
+            <button
+              style={styles.button}
+              onClick={() => (window.location.href = "/admin")}
+            >
+              Go to Admin Dashboard
+            </button>
 
-          <p style={styles.bio}>
-            Passionate learner 🚀 | Future Developer 💻
-          </p>
+            <button onClick={handleLogout} style={styles.button}>
+              Logout
+            </button>
+          </div>
+        ) : (
+          <div style={styles.card}>
+            {/* Profile Image */}
+            <label style={{ cursor: "pointer" }}>
+              <img
+                src={image || "https://via.placeholder.com/120"}
+                alt="profile"
+                style={styles.image}
+              />
+              <input
+                type="file"
+                onChange={handleImageChange}
+                style={{ display: "none" }}
+              />
+            </label>
 
-          <button onClick={handleLogout} style={styles.button}>
-            Logout
-          </button>
-        </div>
+            <h2>{user.name}</h2>
+            <p>{user.email}</p>
+
+            <p style={styles.role}>
+              Role: <strong>{user.role}</strong>
+            </p>
+
+            <p style={styles.subscription}>
+              Plan: <strong>{user.subscription}</strong>
+            </p>
+
+            <p style={styles.limit}>
+              You can learn up to{" "}
+              <strong>{getCourseLimit(user.subscription)}</strong> courses
+            </p>
+
+            <button onClick={handleLogout} style={styles.button}>
+              Logout
+            </button>
+          </div>
+        )
       ) : (
         <div style={styles.card}>
           <h2>Please Login First 🔐</h2>
@@ -91,13 +128,21 @@ const styles = {
     marginBottom: "15px",
     border: "3px solid #4F46E5",
   },
-  bio: {
+  role: {
     marginTop: "10px",
-    color: "#555",
+    color: "#444",
+  },
+  subscription: {
+    marginTop: "5px",
+    color: "#4F46E5",
+  },
+  limit: {
+    marginTop: "10px",
     fontSize: "14px",
+    color: "#555",
   },
   button: {
-    marginTop: "15px",
+    marginTop: "10px",
     padding: "10px",
     width: "100%",
     backgroundColor: "#4F46E5",

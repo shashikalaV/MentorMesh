@@ -1,25 +1,24 @@
-// Import mongoose
 const mongoose = require("mongoose");
 
-// Define user schema
 const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true, // must be provided
-  },
+  name: String,
   email: {
     type: String,
-    required: true,
-    unique: true, // no duplicate emails
+    unique: true,
   },
-  password: {
+  password: String,
+
+  role: {
     type: String,
-    required: true,
+    enum: ["user", "admin"],
+    default: "user",
   },
-}, { timestamps: true }); // adds createdAt & updatedAt
 
-// Create model
-const User = mongoose.model("User", userSchema);
+  subscription: {
+    type: String,
+    enum: ["free", "gold", "platinum"],
+    default: "free",
+  },
+});
 
-// Export model
-module.exports = User;
+module.exports = mongoose.model("User", userSchema);
